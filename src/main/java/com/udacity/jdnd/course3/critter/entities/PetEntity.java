@@ -1,13 +1,29 @@
-package com.udacity.jdnd.course3.critter.pet;
+package com.udacity.jdnd.course3.critter.entities;
 
 import java.time.LocalDate;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import com.udacity.jdnd.course3.critter.domain.PetType;
 
 /**
  * Represents the form that pet request and response data takes. Does not map
  * to the database directly.
  */
-public class PetDTO {
+@Entity
+@Table(name = "pet")
+public class PetEntity {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
+    @Enumerated(EnumType.STRING)
     private PetType type;
     private String name;
     private long ownerId;
@@ -60,5 +76,18 @@ public class PetDTO {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("PetEntity{");
+        sb.append("id=").append(id);
+        sb.append(", type=").append(type);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", ownerId=").append(ownerId);
+        sb.append(", birthDate=").append(birthDate);
+        sb.append(", notes='").append(notes).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

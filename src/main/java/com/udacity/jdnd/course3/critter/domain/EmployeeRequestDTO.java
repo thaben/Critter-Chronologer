@@ -1,4 +1,4 @@
-package com.udacity.jdnd.course3.critter.user;
+package com.udacity.jdnd.course3.critter.domain;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -25,5 +25,14 @@ public class EmployeeRequestDTO {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("EmployeeRequestDTO{");
+        sb.append("skills=").append(skills);
+        sb.append(", date=").append(date);
+        sb.append('}');
+        return sb.toString();
     }
 }

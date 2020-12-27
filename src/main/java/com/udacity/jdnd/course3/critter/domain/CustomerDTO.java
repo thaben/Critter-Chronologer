@@ -1,4 +1,4 @@
-package com.udacity.jdnd.course3.critter.user;
+package com.udacity.jdnd.course3.critter.domain;
 
 import java.util.List;
 
@@ -51,5 +51,17 @@ public class CustomerDTO {
 
     public void setPetIds(List<Long> petIds) {
         this.petIds = petIds;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("CustomerDTO{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", phoneNumber='").append(phoneNumber).append('\'');
+        sb.append(", notes='").append(notes).append('\'');
+        sb.append(", petIds=").append(petIds);
+        sb.append('}');
+        return sb.toString();
     }
 }

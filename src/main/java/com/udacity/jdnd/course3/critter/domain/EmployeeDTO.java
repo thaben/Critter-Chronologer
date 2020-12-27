@@ -1,4 +1,4 @@
-package com.udacity.jdnd.course3.critter.user;
+package com.udacity.jdnd.course3.critter.domain;
 
 import java.time.DayOfWeek;
 import java.util.Set;
@@ -43,5 +43,16 @@ public class EmployeeDTO {
 
     public void setDaysAvailable(Set<DayOfWeek> daysAvailable) {
         this.daysAvailable = daysAvailable;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("EmployeeDTO{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", skills=").append(skills);
+        sb.append(", daysAvailable=").append(daysAvailable);
+        sb.append('}');
+        return sb.toString();
     }
 }
