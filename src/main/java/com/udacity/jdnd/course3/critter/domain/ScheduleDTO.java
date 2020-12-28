@@ -47,6 +47,14 @@ public class ScheduleDTO {
         this.activities = activities;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ScheduleDTO{");

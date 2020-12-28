@@ -31,6 +31,10 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
+    public List<EmployeeEntity> findAllByIds(List<Long> ids) {
+        return employeeRepository.findAllById(ids);
+    }
+
     public EmployeeEntity findById(long id) {
         return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException());
     }

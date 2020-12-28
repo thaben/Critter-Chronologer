@@ -10,5 +10,7 @@ import com.udacity.jdnd.course3.critter.entities.PetEntity;
 @Repository
 public interface PetRepository extends JpaRepository<PetEntity, Long> {
 
-    List<PetEntity> findByOwnerId(Long ownerId);
+    List<PetEntity> findByCustomer_Id(Long ownerId);
+
+
 }

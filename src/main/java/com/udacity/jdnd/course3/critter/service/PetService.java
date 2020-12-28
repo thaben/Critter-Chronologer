@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.udacity.jdnd.course3.critter.entities.CustomerEntity;
 import com.udacity.jdnd.course3.critter.entities.PetEntity;
 import com.udacity.jdnd.course3.critter.mapper.PetMapper;
 import com.udacity.jdnd.course3.critter.repository.PetRepository;
@@ -35,20 +36,27 @@ public class PetService {
         return petRepository.findById(id).orElseThrow(() -> new RuntimeException());
     }
 
+    public List<PetEntity> findAllByIds(List<Long> ids) {
+        return petRepository.findAllById(ids);
+    }
+
     public PetEntity savePet(PetEntity petEntity) {
-        LOGGER.info("Pet entity going to be saved is {}", petEntity);
 
-        PetEntity saved = petRepository.save(petEntity);
 
-        if (petEntity.getOwnerId() != 0) {
-            customerService.addPet(saved.getOwnerId(), saved.getId());
+        if (petEntity.getCustomer() != null) {
+            CustomerEntity customerEntity = customerService.findBy(petEntity.getCustomer().getId());
+            LOGGER.info("CustomerEntity {}", customerEntity);
+            petEntity.setCustomer(customerEntity);
         }
 
+        LOGGER.info("Pet entity going to be saved is {}", petEntity);
+        PetEntity saved = petRepository.save(petEntity);
+        customerService.addPet(saved);
         return saved;
     }
 
     public List<PetEntity> findByOwnerId(Long ownerId) {
-        return petRepository.findByOwnerId(ownerId);
+        return petRepository.findByCustomer_Id(ownerId);
 
     }
 }

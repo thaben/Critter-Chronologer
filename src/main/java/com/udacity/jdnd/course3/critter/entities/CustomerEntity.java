@@ -3,6 +3,7 @@ package com.udacity.jdnd.course3.critter.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -10,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -28,13 +30,9 @@ public class CustomerEntity {
     private String phoneNumber;
     @Size(max = 200)
     private String notes;
-    @ElementCollection
-//    @CollectionTable(
-//            name="pet",
-//            joinColumns=@JoinColumn(name="pet_id")
-//    )
-    @CollectionTable(name = "customer_pet_id")
-    private List<Long> petIds = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<PetEntity> pets = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -68,12 +66,12 @@ public class CustomerEntity {
         this.notes = notes;
     }
 
-    public List<Long> getPetIds() {
-        return petIds;
+    public List<PetEntity> getPets() {
+        return pets;
     }
 
-    public void setPetIds(List<Long> petIds) {
-        this.petIds = petIds;
+    public void setPets(List<PetEntity> pets) {
+        this.pets = pets;
     }
 
     @Override
@@ -83,7 +81,6 @@ public class CustomerEntity {
         sb.append(", name='").append(name).append('\'');
         sb.append(", phoneNumber='").append(phoneNumber).append('\'');
         sb.append(", notes='").append(notes).append('\'');
-        sb.append(", petIds=").append(petIds);
         sb.append('}');
         return sb.toString();
     }

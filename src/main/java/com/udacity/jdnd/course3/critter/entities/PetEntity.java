@@ -8,6 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -26,7 +28,8 @@ public class PetEntity {
     @Enumerated(EnumType.STRING)
     private PetType type;
     private String name;
-    private long ownerId;
+    @ManyToOne(targetEntity = CustomerEntity.class, optional = true)
+    private CustomerEntity customer;
     private LocalDate birthDate;
     private String notes;
 
@@ -46,12 +49,12 @@ public class PetEntity {
         this.name = name;
     }
 
-    public long getOwnerId() {
-        return ownerId;
+    public CustomerEntity getCustomer() {
+        return customer;
     }
 
-    public void setOwnerId(long ownerId) {
-        this.ownerId = ownerId;
+    public void setCustomer(CustomerEntity customer) {
+        this.customer = customer;
     }
 
     public LocalDate getBirthDate() {
@@ -84,7 +87,7 @@ public class PetEntity {
         sb.append("id=").append(id);
         sb.append(", type=").append(type);
         sb.append(", name='").append(name).append('\'');
-        sb.append(", ownerId=").append(ownerId);
+        sb.append(", customer=").append(customer);
         sb.append(", birthDate=").append(birthDate);
         sb.append(", notes='").append(notes).append('\'');
         sb.append('}');

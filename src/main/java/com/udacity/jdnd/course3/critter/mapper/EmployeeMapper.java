@@ -9,5 +9,8 @@ import com.udacity.jdnd.course3.critter.entities.EmployeeEntity;
 public interface EmployeeMapper {
 
     EmployeeEntity dtoToEntity(EmployeeDTO employeeDTO);
+
     EmployeeDTO entityToDto(EmployeeEntity employeeEntity);
+
+
 }
