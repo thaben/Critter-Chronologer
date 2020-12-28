@@ -2,6 +2,8 @@ package com.udacity.jdnd.course3.critter.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import com.udacity.jdnd.course3.critter.mapper.PetMapper;
 import com.udacity.jdnd.course3.critter.repository.PetRepository;
 
 @Service
+@Transactional
 public class PetService {
     private static final Logger LOGGER = LoggerFactory.getLogger(PetService.class);
 
